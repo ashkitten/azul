@@ -22,6 +22,7 @@ environment:
 branches:
   only:
     - master
+    - develop
 
 # Install Rust and Cargo
 # Based on https://github.com/rust-lang/libc/blob/master/appveyor.yml
