@@ -402,9 +402,9 @@ fn main() {
     let font_id = app.resources.add_css_font_id("KoHo-Light");
     app.resources.add_font_source(font_id, FontSource::Embedded(FONT));
 
-    // Create 4 windows to test multi-windowing
-    app.add_window(WindowCreateOptions::new(css.clone()));
-    app.add_window(WindowCreateOptions::new(css.clone()));
-    app.add_window(WindowCreateOptions::new(css.clone()));
+    // // Create 4 windows to test multi-windowing
+    // app.add_window(WindowCreateOptions::new(css.clone()));
+    // app.add_window(WindowCreateOptions::new(css.clone()));
+    // app.add_window(WindowCreateOptions::new(css.clone()));
     app.run(WindowCreateOptions::new(css.clone()));
 }
