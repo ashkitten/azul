@@ -17,7 +17,7 @@ autoexamples = false
 edition = "2018"
 
 [lib]
-path = "../../azul-native-style/lib.rs"
+path = "lib.rs"
 
 [dependencies]
 azul-css                = { path = "../azul-css",          default-features = false }

@@ -7,9 +7,9 @@ use azul::{
     widgets::{button::Button, svg::*},
 };
 
-macro_rules! CSS_PATH { () => (concat!(env!("CARGO_MANIFEST_DIR"), "/../../examples/svg/svg.css")) }
+macro_rules! CSS_PATH { () => (concat!(env!("CARGO_MANIFEST_DIR"), "/../examples/svg/svg.css")) }
 
-const SVG: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/svg/tiger.svg"));
+const SVG: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/../assets/svg/tiger.svg"));
 
 #[derive(Debug)]
 struct MyAppData {

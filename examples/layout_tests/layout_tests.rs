@@ -138,7 +138,7 @@ fn main() {
 
     use std::process::exit;
 
-    const TESTS_DIRECTORY: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../../tests");
+    const TESTS_DIRECTORY: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../tests");
 
     let mut layout_tests_ok = Vec::new();
     let mut layout_tests_err = Vec::new();

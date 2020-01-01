@@ -4,8 +4,8 @@ extern crate azul;
 
 use azul::prelude::*;
 
-macro_rules! XML_PATH { () => (concat!(env!("CARGO_MANIFEST_DIR"), "/../../examples/xml/ui.html")) }
-macro_rules! CSS_PATH { () => (concat!(env!("CARGO_MANIFEST_DIR"), "/../../examples/xml/xml.css")) }
+macro_rules! XML_PATH { () => (concat!(env!("CARGO_MANIFEST_DIR"), "/../examples/xml/ui.html")) }
+macro_rules! CSS_PATH { () => (concat!(env!("CARGO_MANIFEST_DIR"), "/../examples/xml/xml.css")) }
 
 struct DataModel { }
 

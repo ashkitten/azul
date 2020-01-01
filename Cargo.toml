@@ -1,12 +1,12 @@
 [workspace]
 members = [
-    "cargo/azul",
-    "cargo/azulc",
-    "cargo/azul-css",
-    "cargo/azul-core",
-    "cargo/azul-layout",
-    "cargo/azul-text-layout",
-    "cargo/azul-widgets",
-    "cargo/azul-css-parser",
-    "cargo/azul-native-style",
+    "azul",
+    "azulc",
+    "azul-css",
+    "azul-core",
+    "azul-layout",
+    "azul-text-layout",
+    "azul-widgets",
+    "azul-css-parser",
+    "azul-native-style",
 ]
