@@ -769,7 +769,7 @@ fn initialize_os_window_mac_extensions(
     }
 }
 
-/// Since the rendering is single-th9readed anyways, the renderer is shared across windows.
+/// Since the rendering is single-threaded anyways, the renderer is shared across windows.
 /// Second, in order to use the font-related functions on the `RenderApi`, we need to
 /// store the RenderApi somewhere in the AppResources. However, the `RenderApi` is bound
 /// to a window (because OpenGLs function pointer is bound to a window).
