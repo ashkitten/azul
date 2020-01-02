@@ -251,8 +251,10 @@ impl AnonDom {
                         previous_sibling:
                             if let Some((last_anon_node, num_anon_nodes_before)) = anon_node_tree_was_ended {
                                 Some(last_anon_node + num_anon_nodes_before)
-                            } else {
+                            } else if last_child_is_inline_node == current_child_is_inline_node {
                                 child_node.previous_sibling.map(|n| n + num_anon_nodes)
+                            } else {
+                                None
                             },
                         next_sibling:
                             if current_child_is_inline_node && !next_child_is_inline_node {
