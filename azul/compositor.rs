@@ -72,7 +72,7 @@ mod osmesa {
 
             Ok(OSMesaContext {
                 buffer: vec![0u8; width * height * 4],
-                context: context,
+                context,
             })
         }
     }

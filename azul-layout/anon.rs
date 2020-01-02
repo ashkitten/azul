@@ -385,9 +385,7 @@ fn test_anon_dom() {
         display_list::DisplayList,
     };
     use azul_css::{
-        Css, Stylesheet, CssRuleBlock, CssPath, CssDeclaration,
-        CssPathSelector, CssProperty, LayoutDisplay,
-        LayoutRect, LayoutSize, LayoutPoint,
+        Css, LayoutRect, LayoutSize, LayoutPoint,
     };
     use crate::GetStyle;
 
