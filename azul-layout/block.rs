@@ -213,6 +213,7 @@ fn solve_heights<T: GetTextLayout>(
                 .map(|c| content_heights.get(&c).copied().unwrap_or(0.0))
                 .sum();
 
+            let child_orig_node_id = anon_dom.reverse_node_id_mapping.get(&child_id).unwrap_or(&NodeId::ZERO);
             let block_height = match &anon_dom.anon_node_data[child_id] {
                 BlockNode(ref style) => {
                     calculate_block_height(
@@ -221,7 +222,7 @@ fn solve_heights<T: GetTextLayout>(
                         parent_size.height,
                         self_width,
                         children_content_height,
-                        rect_contents.get_mut(&child_id),
+                        rect_contents.get_mut(child_orig_node_id),
                         resolved_text_layout_options.get(&child_id),
                     )
                 },
@@ -232,7 +233,7 @@ fn solve_heights<T: GetTextLayout>(
                         parent_size.height,
                         self_width,
                         children_content_height,
-                        rect_contents.get_mut(&child_id),
+                        rect_contents.get_mut(child_orig_node_id),
                         resolved_text_layout_options.get(&child_id),
                     )
                 },
