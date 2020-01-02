@@ -98,19 +98,20 @@ impl AnonDom {
 
         use self::AnonNode::*;
 
-        // Worst case scenario is that every node needs an anonymous block.
-        // Pre-allocate 2x the nodes to avoid recursion
-        let mut new_nodes = vec![AnonNode::AnonStyle; node_hierarchy.len() * 2];
-        let mut new_node_hierarchy = vec![Node::ROOT; node_hierarchy.len() * 2];
+        // Count how many anonymous nodes need to be inserted in order
+        // to correct the "next sibling" count
+        let anon_nodes_count = count_all_anon_nodes(node_hierarchy, node_styles, node_depths, rect_contents);
+
+        let total_anon_nodes = anon_nodes_count[&node_depths[0].1];
+        let total_nodes = node_hierarchy.len() + total_anon_nodes;
+
+        let mut new_nodes = vec![AnonNode::AnonStyle; total_nodes];
+        let mut new_node_hierarchy = vec![Node::ROOT; total_nodes];
         let mut original_node_id_mapping = BTreeMap::new();
         let mut reverse_node_id_mapping = BTreeMap::new();
 
         original_node_id_mapping.insert(NodeId::ZERO, NodeId::ZERO);
         reverse_node_id_mapping.insert(NodeId::ZERO, NodeId::ZERO);
-
-        // Count how many anonymous nodes need to be inserted in order
-        // to correct the "next sibling" count
-        let anon_nodes_count = count_all_anon_nodes(node_hierarchy, node_styles, node_depths, rect_contents);
 
         for (depth, parent_id) in node_depths {
 
@@ -282,12 +283,6 @@ impl AnonDom {
                 assert_eq!(last_anon_node, None);
             }
         }
-
-        let total_anon_nodes = anon_nodes_count[&node_depths[0].1];
-
-        let total_nodes = node_hierarchy.len() + total_anon_nodes;
-        new_nodes.truncate(total_nodes);
-        new_node_hierarchy.truncate(total_nodes);
 
         Self {
             anon_node_hierarchy: NodeHierarchy::new(new_node_hierarchy),
