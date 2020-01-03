@@ -289,8 +289,6 @@ fn position_items(
 
     let mut cur_y = 0.0;
 
-    // stack to track what the last position: absolute item was
-    let mut position_relative_absolute_stack = Vec::new();
     let mut cur_depth = 0;
 
     for (depth, parent_node_id) in anon_dom_depths.iter() {
@@ -299,9 +297,6 @@ fn position_items(
 
         // we are processing a new depth level
         if *depth != cur_depth {
-            if position_relative_absolute_stack.last().map(|s: &(NodeId, usize)| s.1) == Some(cur_depth) {
-                position_relative_absolute_stack.pop();
-            }
             cur_y = 0.0;
             cur_depth = *depth;
         }
@@ -318,10 +313,6 @@ fn position_items(
         let parent_node = &anon_dom.anon_node_data[*parent_node_id];
         let parent_display_mode = parent_node.get_display();
         let parent_position_type = parent_node.get_position_type();
-
-        if parent_position_type != PositionType::Static {
-            position_relative_absolute_stack.push((*parent_node_id, *depth));
-        }
 
         if parent_display_mode == Display::None {
             continue;
