@@ -287,19 +287,10 @@ fn position_items(
     // In order to do a block layout, we first have to know whether
     // can overflow the parent horizontally.
 
-    let mut cur_y = 0.0;
-
-    let mut cur_depth = 0;
-
-    for (depth, parent_node_id) in anon_dom_depths.iter() {
+    for (_depth, parent_node_id) in anon_dom_depths.iter() {
 
         let mut cur_x = 0.0;
-
-        // we are processing a new depth level
-        if *depth != cur_depth {
-            cur_y = 0.0;
-            cur_depth = *depth;
-        }
+        let mut cur_y = 0.0;
 
         /*
         let parent_width = match anon_dom.anon_node_hierarchy[*parent_node_id].parent {
@@ -312,7 +303,6 @@ fn position_items(
 
         let parent_node = &anon_dom.anon_node_data[*parent_node_id];
         let parent_display_mode = parent_node.get_display();
-        let parent_position_type = parent_node.get_position_type();
 
         if parent_display_mode == Display::None {
             continue;
