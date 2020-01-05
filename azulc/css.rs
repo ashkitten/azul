@@ -131,6 +131,7 @@ fn format_static_css_prop(prop: &CssProperty, tabs: usize) -> String {
         CssProperty::FontSize(p) => format!("CssProperty::FontSize({})", print_css_property_value(p, tabs)),
         CssProperty::FontFamily(p) => format!("CssProperty::FontFamily({})", print_css_property_value(p, tabs)),
         CssProperty::TextAlign(p) => format!("CssProperty::TextAlign({})", print_css_property_value(p, tabs)),
+        CssProperty::VerticalAlign(p) => format!("CssProperty::VerticalAlign({})", print_css_property_value(p, tabs)),
         CssProperty::LetterSpacing(p) => format!("CssProperty::LetterSpacing({})", print_css_property_value(p, tabs)),
         CssProperty::LineHeight(p) => format!("CssProperty::LineHeight({})", print_css_property_value(p, tabs)),
         CssProperty::WordSpacing(p) => format!("CssProperty::WordSpacing({})", print_css_property_value(p, tabs)),
@@ -455,6 +456,12 @@ impl_enum_fmt!(StyleTextAlignmentHorz,
     Center,
     Left,
     Right
+);
+
+impl_enum_fmt!(StyleTextAlignmentVert,
+    Center,
+    Top,
+    Bottom
 );
 
 impl_enum_fmt!(DirectionCorner,

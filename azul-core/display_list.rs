@@ -1384,6 +1384,7 @@ pub fn apply_style_property(style: &mut RectStyle, layout: &mut RectLayout, prop
         FontSize(fs)                    => style.font_size = Some(*fs),
         FontFamily(ff)                  => style.font_family = Some(ff.clone()),
         TextAlign(ta)                   => style.text_align = Some(*ta),
+        VerticalAlign(va)               => style.vertical_align = Some(*va),
 
         LetterSpacing(ls)               => style.letter_spacing = Some(*ls),
         LineHeight(lh)                  => style.line_height = Some(*lh),

@@ -9,7 +9,7 @@ use azul_css::{
     SizeMetric, BoxShadowClipMode, ExtendMode, FontId, GradientType,
     BackgroundPositionHorizontal, BackgroundPositionVertical,
 
-    StyleTextColor, StyleFontSize, StyleFontFamily, StyleTextAlignmentHorz,
+    StyleTextColor, StyleFontSize, StyleFontFamily, StyleTextAlignmentHorz, StyleTextAlignmentVert,
     StyleLetterSpacing, StyleLineHeight, StyleWordSpacing, StyleTabWidth,
     StyleCursor, StyleBackgroundContent, StyleBackgroundPosition, StyleBackgroundSize,
     StyleBackgroundRepeat, StyleBorderTopLeftRadius, StyleBorderTopRightRadius,
@@ -126,7 +126,8 @@ pub fn parse_css_property<'a>(key: CssPropertyType, value: &'a str) -> Result<Cs
             TextColor                   => parse_style_text_color(value)?.into(),
             FontSize                    => parse_style_font_size(value)?.into(),
             FontFamily                  => parse_style_font_family(value)?.into(),
-            TextAlign                   => parse_layout_text_align(value)?.into(),
+            TextAlign                   => parse_style_text_align(value)?.into(),
+            VerticalAlign               => parse_style_vertical_align(value)?.into(),
             LetterSpacing               => parse_style_letter_spacing(value)?.into(),
             LineHeight                  => parse_style_line_height(value)?.into(),
             WordSpacing                 => parse_style_word_spacing(value)?.into(),
@@ -2489,10 +2490,15 @@ multi_type_parser!(parse_layout_overflow, Overflow,
                     ["visible", Visible],
                     ["hidden", Hidden]);
 
-multi_type_parser!(parse_layout_text_align, StyleTextAlignmentHorz,
+multi_type_parser!(parse_style_text_align, StyleTextAlignmentHorz,
                     ["center", Center],
                     ["left", Left],
                     ["right", Right]);
+
+multi_type_parser!(parse_style_vertical_align, StyleTextAlignmentVert,
+                    ["center", Center],
+                    ["top", Top],
+                    ["bottom", Bottom]);
 
 #[cfg(test)]
 mod css_tests {

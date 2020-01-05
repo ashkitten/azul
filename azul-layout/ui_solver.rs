@@ -195,15 +195,9 @@ fn determine_text_alignment(
     let mut horz_alignment = StyleTextAlignmentHorz::default();
     let mut vert_alignment = StyleTextAlignmentVert::default();
 
-    if let Some(align_items) = rect_layout.align_items.and_then(|ai| ai.get_property_or_default()) {
+    if let Some(vertical_align) = rect_style.vertical_align.and_then(|va| va.get_property_or_default()) {
         // Vertical text alignment
-        use azul_css::LayoutAlignItems;
-        match align_items {
-            LayoutAlignItems::Start => vert_alignment = StyleTextAlignmentVert::Top,
-            LayoutAlignItems::End => vert_alignment = StyleTextAlignmentVert::Bottom,
-            // technically stretch = blocktext, but we don't have that yet
-            _ => vert_alignment = StyleTextAlignmentVert::Center,
-        }
+        vert_alignment = vertical_align;
     }
 
     if let Some(justify_content) = rect_layout.justify_content.and_then(|jc| jc.get_property_or_default()) {

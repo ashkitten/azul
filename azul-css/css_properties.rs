@@ -26,7 +26,7 @@ const COMBINED_CSS_PROPERTIES_KEY_MAP: [(CombinedCssPropertyType, &'static str);
 ];
 
 /// Map between CSS keys and a statically typed enum
-const CSS_PROPERTY_KEY_MAP: [(CssPropertyType, &'static str);66] = [
+const CSS_PROPERTY_KEY_MAP: [(CssPropertyType, &'static str);67] = [
 
     (CssPropertyType::Display,              "display"),
     (CssPropertyType::Float,                "float"),
@@ -36,6 +36,7 @@ const CSS_PROPERTY_KEY_MAP: [(CssPropertyType, &'static str);66] = [
     (CssPropertyType::FontSize,             "font-size"),
     (CssPropertyType::FontFamily,           "font-family"),
     (CssPropertyType::TextAlign,            "text-align"),
+    (CssPropertyType::VerticalAlign,        "vertical-align"),
 
     (CssPropertyType::LetterSpacing,        "letter-spacing"),
     (CssPropertyType::LineHeight,           "line-height"),
@@ -626,6 +627,7 @@ pub enum CssPropertyType {
     FontSize,
     FontFamily,
     TextAlign,
+    VerticalAlign,
 
     LetterSpacing,
     LineHeight,
@@ -734,7 +736,8 @@ impl CssPropertyType {
             | FontFamily
             | FontSize
             | LineHeight
-            | TextAlign => true,
+            | TextAlign
+            | VerticalAlign => true,
             _ => false,
         }
     }
@@ -795,6 +798,7 @@ pub enum CssProperty {
     FontSize(CssPropertyValue<StyleFontSize>),
     FontFamily(CssPropertyValue<StyleFontFamily>),
     TextAlign(CssPropertyValue<StyleTextAlignmentHorz>),
+    VerticalAlign(CssPropertyValue<StyleTextAlignmentVert>),
 
     LetterSpacing(CssPropertyValue<StyleLetterSpacing>),
     LineHeight(CssPropertyValue<StyleLineHeight>),
@@ -877,6 +881,7 @@ macro_rules! css_property_from_type {($prop_type:expr, $content_type:ident) => (
         CssPropertyType::FontSize => CssProperty::FontSize(CssPropertyValue::$content_type),
         CssPropertyType::FontFamily => CssProperty::FontFamily(CssPropertyValue::$content_type),
         CssPropertyType::TextAlign => CssProperty::TextAlign(CssPropertyValue::$content_type),
+        CssPropertyType::VerticalAlign => CssProperty::VerticalAlign(CssPropertyValue::$content_type),
         CssPropertyType::LetterSpacing => CssProperty::LetterSpacing(CssPropertyValue::$content_type),
         CssPropertyType::LineHeight => CssProperty::LineHeight(CssPropertyValue::$content_type),
         CssPropertyType::WordSpacing => CssProperty::WordSpacing(CssPropertyValue::$content_type),
@@ -951,6 +956,7 @@ impl CssProperty {
             CssProperty::FontSize(_) => CssPropertyType::FontSize,
             CssProperty::FontFamily(_) => CssPropertyType::FontFamily,
             CssProperty::TextAlign(_) => CssPropertyType::TextAlign,
+            CssProperty::VerticalAlign(_) => CssPropertyType::VerticalAlign,
             CssProperty::LetterSpacing(_) => CssPropertyType::LetterSpacing,
             CssProperty::LineHeight(_) => CssPropertyType::LineHeight,
             CssProperty::WordSpacing(_) => CssPropertyType::WordSpacing,
@@ -1044,6 +1050,9 @@ impl CssProperty {
 
     /// Creates a `text_align` CSS attribute
     pub const fn text_align(input: StyleTextAlignmentHorz) -> Self { CssProperty::TextAlign(CssPropertyValue::Exact(input)) }
+
+    /// Creates a `vertical_align` CSS attribute
+    pub const fn vertical_align(input: StyleTextAlignmentVert) -> Self { CssProperty::VerticalAlign(CssPropertyValue::Exact(input)) }
 
     /// Creates a `letter_spacing` CSS attribute
     pub const fn letter_spacing(input: StyleLetterSpacing) -> Self { CssProperty::LetterSpacing(CssPropertyValue::Exact(input)) }
@@ -1241,6 +1250,7 @@ impl_from_css_prop!(StyleTextColor, CssProperty::TextColor);
 impl_from_css_prop!(StyleFontSize, CssProperty::FontSize);
 impl_from_css_prop!(StyleFontFamily, CssProperty::FontFamily);
 impl_from_css_prop!(StyleTextAlignmentHorz, CssProperty::TextAlign);
+impl_from_css_prop!(StyleTextAlignmentVert, CssProperty::VerticalAlign);
 impl_from_css_prop!(StyleLetterSpacing, CssProperty::LetterSpacing);
 impl_from_css_prop!(StyleLineHeight, CssProperty::LineHeight);
 impl_from_css_prop!(StyleWordSpacing, CssProperty::WordSpacing);
@@ -2449,6 +2459,7 @@ pub struct RectStyle {
     pub font_family: Option<CssPropertyValue<StyleFontFamily>>,
     pub text_color: Option<CssPropertyValue<StyleTextColor>>,
     pub text_align: Option<CssPropertyValue<StyleTextAlignmentHorz>>,
+    pub vertical_align: Option<CssPropertyValue<StyleTextAlignmentVert>>,
     pub line_height: Option<CssPropertyValue<StyleLineHeight>>,
     pub letter_spacing: Option<CssPropertyValue<StyleLetterSpacing>>,
     pub word_spacing: Option<CssPropertyValue<StyleWordSpacing>>,
