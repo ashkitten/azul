@@ -272,7 +272,7 @@ pub mod prelude {
         window_state::keymap,
         display_list::GlyphInstance,
         app_resources::{
-            AppResources, RawImageFormat, ImageId, FontId,
+            AppResources, RawImage, RawImageFormat, ImageId, FontId,
             FontSource, ImageSource, TextCache, TextId,
         },
         callbacks::*,
