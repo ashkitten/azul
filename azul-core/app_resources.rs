@@ -1546,7 +1546,7 @@ pub fn is_image_opaque(format: RawImageFormat, bytes: &[u8]) -> bool {
             is_opaque
         }
         RawImageFormat::R8 => true,
-        _ => unreachable!(),
+        _ => unimplemented!("loading {:?} images is not supported yet", format),
     }
 }
 
